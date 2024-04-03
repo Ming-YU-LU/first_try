@@ -3,7 +3,7 @@ import constantRoutes from './constant'
 
 const router = createRouter({
     history: createWebHistory(),
-    routes: constantRoutes
+    routes: constantRoutes,
 })
 
 export default router
