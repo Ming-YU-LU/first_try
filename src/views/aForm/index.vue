@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import item1 from '@/methods/formPageData'
-import formItemCom from './formItemCom.vue';
+import formItemCom from './formItemCom.vue'
 console.log(item1)
 </script>
 

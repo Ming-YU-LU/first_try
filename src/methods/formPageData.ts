@@ -1,10 +1,10 @@
-import { createFormItem } from "./formItem";
+import { createFormItem } from './formItem'
 
 // formItem中next方法 来决定返回哪一个formItem
 const item1 = createFormItem(
     'input',
     { label: 'test1', value: '' },
-    (current) => (current.payload.value === 'test1' ? item2 : item3)
+    (current) => (current.payload.value === 'test1' ? item2 : item3),
 )
 
 const item2 = createFormItem(
@@ -13,15 +13,18 @@ const item2 = createFormItem(
         label: 'test2',
         options: [
             {
-                label: 'test2-1', value: 'test-2-1'
+                label: 'test2-1',
+                value: 'test-2-1',
             },
             {
-                label: 'test2-2', value: 'test2-2'
+                label: 'test2-2',
+                value: 'test2-2',
             },
             {
-                label: 'test2-3', value: 'test2-3'
-            }
-        ]
+                label: 'test2-3',
+                value: 'test2-3',
+            },
+        ],
     },
     (current) => {
         if (current.payload.value === 'test2-2') {
@@ -31,7 +34,7 @@ const item2 = createFormItem(
         } else {
             return null
         }
-    }
+    },
 )
 
 const item3 = createFormItem(
@@ -41,22 +44,19 @@ const item3 = createFormItem(
         options: [
             { label: 'test3-1', value: 'test3-1' },
             { label: 'test3-2', value: 'test3-2' },
-            { label: 'test3-3', value: 'test3-3' }
+            { label: 'test3-3', value: 'test3-3' },
         ],
-        value: ['test3-1', 'test3-2']
+        value: ['test3-1', 'test3-2'],
     },
-    (current) => (current.payload.value.includes('test3-1') ? item4 : null)
+    (current) => (current.payload.value.includes('test3-1') ? item4 : null),
 )
-const item4 = createFormItem(
-    'radio',
-    {
-        label: 'test4',
-        options: [
-            { label: 'test4-1', value: 'test4-1' },
-            { label: 'test4-2', value: 'test4-2' },
-            { label: 'test4-3', value: 'test4-3' },
-        ],
-        value: 'test4-1'
-    }
-)
+const item4 = createFormItem('radio', {
+    label: 'test4',
+    options: [
+        { label: 'test4-1', value: 'test4-1' },
+        { label: 'test4-2', value: 'test4-2' },
+        { label: 'test4-3', value: 'test4-3' },
+    ],
+    value: 'test4-1',
+})
 export default item1
