@@ -1,13 +1,20 @@
 <template>
     <div>
-        <formItemCom :formState="item1"></formItemCom>
+        <formItemCom :formState="item1" ref="kid"></formItemCom>
     </div>
+
 </template>
 
 <script setup lang="ts">
-import item1 from '@/methods/formPageData'
-import formItemCom from './formItemCom.vue'
-console.log(item1)
+// import { ref, nextTick } from 'vue';
+import formItemCom from '@/views/aForm/formItem.vue'
+import item1 from '@/methods/formItem'
+
+// nextTick(() => {
+//     console.log(kid.value)
+// })
+// const kid = ref()
+
 </script>
 
 <style scoped lang="scss"></style>

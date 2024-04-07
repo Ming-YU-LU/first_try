@@ -1,42 +1,75 @@
-import { isReactive, reactive } from 'vue'
+import { createFormItem } from './formData'
 
-export type FormItemType = 'input' | 'select' | 'checkbox' | 'radio'
+const item1 = createFormItem(
+    'input',
+    {
+        label: 'test1-1', value: ''
+    },
+    (current) => (current.payload.value === 'test1-1' ? item2 : item3)
+)
 
-export interface FormItem {
-    type: FormItemType
-    payload: any
-    next: (current: FormItem, acients: FormItem[]) => FormItem | null
-    parent: FormItem | null
-}
-
-export function createFormItem(
-    formItemType: FormItem['type'],
-    payload: FormItem['payload'],
-    next?: FormItem['next'],
-    parent?: FormItem['parent'],
-): FormItem {
-    if (!next) {
-        next = () => null
-    }
-    if (!parent) {
-        parent = null
-    }
-    const nextFunc: FormItem['next'] = (current, acients) => {
-        let nextItem = next!(current, acients)
-        if (!nextItem) {
+const item2 = createFormItem(
+    'select',
+    {
+        value: '',
+        options: [
+            {
+                label: 'test2-1', value: 'test2-1'
+            },
+            {
+                label: 'test2-2', value: 'test2-2'
+            }
+        ],
+        label: 'test2'
+    },
+    (current) => {
+        if (current.payload.value === 'test2-1') {
+            return item3
+        } else if (current.payload.value === 'test2-2') {
+            return item4
+        } else {
             return null
         }
-        nextItem.parent = current
-        if (!isReactive(nextItem)) {
-            nextItem = reactive(nextItem)
-        }
-        return nextItem
     }
-    const formItem: FormItem = reactive({
-        type: formItemType,
-        payload,
-        next: nextFunc,
-        parent,
-    })
-    return formItem
-}
+)
+
+const item3 = createFormItem(
+    'checkbox',
+    {
+        label: 'test3',
+        options: [
+            {
+                label: 'test3-1', value: 'test3-1'
+            },
+            {
+                label: 'test3-2', value: 'test3-2'
+            },
+            {
+                label: 'test3-3', value: 'test3-3'
+            }
+        ],
+        value: ['test3-2']
+    },
+    (current) => current.payload.value.includes('test3-2') ? item4 : null
+)
+
+const item4 = createFormItem(
+    'radio',
+    {
+        label: 'test4',
+        options: [
+            {
+                label: 'test4-1', value: 'test4-1'
+            },
+            {
+                label: 'test4-2', value: 'test4-2'
+            },
+            {
+                label: 'test4-3', value: 'test4-3'
+            }
+        ],
+        value: ['test4-1']
+    }
+)
+
+export default item1
