@@ -1,4 +1,4 @@
-import { reactive, isReactive } from "vue"
+import { reactive, isReactive } from 'vue'
 export type FormItemType = 'select' | 'input' | 'checkbox' | 'radio'
 
 export interface FormItem {
@@ -12,7 +12,7 @@ export function createFormItem(
     formItemType: FormItem['type'],
     payload: FormItem['payload'],
     next?: FormItem['next'],
-    parent?: FormItem['parent']
+    parent?: FormItem['parent'],
 ) {
     if (!next) {
         next = () => null
@@ -26,7 +26,7 @@ export function createFormItem(
             return null
         }
         nextItem.parent = current
-        console.log(nextItem, 'nextItem, ancients', ancients,)
+        console.log(nextItem, 'nextItem, ancients', ancients)
         if (!isReactive(nextItem)) {
             nextItem = reactive(nextItem)
         }
@@ -36,7 +36,7 @@ export function createFormItem(
         type: formItemType,
         payload,
         next: nextFunc,
-        parent
+        parent,
     })
     return fromItem
 }
