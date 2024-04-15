@@ -1,5 +1,5 @@
 import request from '@/request/simple/request'
-import { RegisterUser } from '@/api/user/type'
+import { RegisterUser, LoginUser } from '@/api/user/type'
 import qlRequest from '@/request'
 
 enum UserApi {
@@ -8,8 +8,17 @@ enum UserApi {
     USER_INFO = '/user/info'
 }
 
+//  之前封装的axios
+// export const reqUserRegister = (data: RegisterUser) => {
+//     return request<any, any>({
+//         method: 'post',
+//         url: UserApi.USER_REGISTER,
+//         data,
+//     })
+// }
+
 export const reqUserRegister = (data: RegisterUser) => {
-    return request<any, any>({
+    return qlRequest.instance.request({
         method: 'post',
         url: UserApi.USER_REGISTER,
         data
@@ -20,13 +29,21 @@ export const reqUserRegister = (data: RegisterUser) => {
 export const reqSearch = () => {
     return request.request({
         method: 'get',
-        url: `${UserApi.USER_INFO}/?store=userInfo`
+        url: `${UserApi.USER_INFO}/?store=userInfo`,
     })
 }
 
 export const reqSearchOther = () => {
-    return qlRequest.request({
+    return qlRequest.instance.request<any, any>({
         method: 'get',
-        url: `${UserApi.USER_INFO}/?store=userInfo`
+        url: `${UserApi.USER_INFO}/?store=userInfo`,
+    })
+}
+
+export const reqLogin = (data: any) => {
+    return qlRequest.instance.request<any, LoginUser>({
+        method: 'post',
+        url: UserApi.USER_LOGIN,
+        data
     })
 }

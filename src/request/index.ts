@@ -16,17 +16,23 @@ const qlRequest = new QLRequest({
             return error
         },
         responseInterceptor: (response) => {
-            const { status, data } = (response as AxiosResponse)
+            const { status, data } = response as AxiosResponse
             if (status === 200) {
                 return data
             }
         },
         responseInterceptorCatch: (error) => {
-            const response = (error as AxiosError).response
-            const { status } = response as AxiosResponse
+            // console.log('我是request拦截器')
+            const { status } = error.response as AxiosError
+            console.log(status, 'response拦截器')
+            // const { status } = response as AxiosResponse
+            if (typeof status === 'string') {
+                return Promise.reject(new Error(status))
+            }
+
             return Promise.reject(handleStatus(status))
-        }
-    }
+        },
+    },
 })
 
 export default qlRequest

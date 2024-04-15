@@ -6,19 +6,28 @@
                     <a-input v-model:value="formState.payload.value"></a-input>
                 </template>
                 <template v-else-if="formState.type === 'checkbox'">
-                    <a-checkbox-group v-model:value="formState.payload.value" :options="formState.payload.options">
+                    <a-checkbox-group
+                        v-model:value="formState.payload.value"
+                        :options="formState.payload.options"
+                    >
                         {{ formState.payload.options.value }}
                     </a-checkbox-group>
                 </template>
                 <template v-if="formState.type === 'select'">
                     <label id="title" :title="formState.payload.label">
-                        <a-select v-model:value="formState.payload.value" :options="formState.payload.options">
+                        <a-select
+                            v-model:value="formState.payload.value"
+                            :options="formState.payload.options"
+                        >
                             {{}}
                         </a-select>
                     </label>
                 </template>
                 <template v-else-if="formState.type === 'radio'">
-                    <a-checkbox-group v-model:value="formState.payload.value" :options="formState.payload.options">
+                    <a-checkbox-group
+                        v-model:value="formState.payload.value"
+                        :options="formState.payload.options"
+                    >
                         {{ formState.payload.options.value }}
                     </a-checkbox-group>
                 </template>

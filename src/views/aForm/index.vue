@@ -1,7 +1,6 @@
 <template>
     <div>
         <formItemCom :formState="item1" ref="kid"></formItemCom>
-
     </div>
 </template>
 
